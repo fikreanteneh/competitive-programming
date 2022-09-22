@@ -1,0 +1,9 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        v = []
+        for i in s:
+            if len(v) == 0 or v[-1] == i:
+                v.append(i)
+            else:
+                v.pop()
+        return len(v) == 0
