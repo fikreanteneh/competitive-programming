@@ -1,15 +1,14 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort()
         new = []
         new.append(intervals[0])
-        for i in intervals:
-            flag = True
-            for j in range (len(new)):
-                if i[0]> new[j][1] or i[1] < new[j][0]:
-                    continue
-                if new[j][0] > i[0]: new[j][0]= i[0]
-                if new[j][1] < i[1]: new[j][1]= i[1]
-                flag = False
-                break
-            if flag: new.append(i)
+        for i in range(1, len(intervals)):
+            point1 = new[-1]
+            point2 = intervals[i]
+
+            if point2[0] > point1[1]:
+                new.append(point2)
+            else:
+                if point1[1] < point2[1]: point1[1] = point2[1]
         return new
