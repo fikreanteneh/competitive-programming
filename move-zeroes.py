@@ -6,8 +6,13 @@ class Solution:
         back = 0
         front = 0
         while front < len(nums)-1:
-            if nums[front +1]!=0:
-                nums[front + 1], nums[back] = nums[back], nums[front + 1]
+            if len(nums) <= 1: return
+            if nums[back] !=0:
+                front+=1
+                back+=1
+            elif nums[front +1]!=0:
+                if nums[front] == 0:
+                    nums[front + 1], nums[back] = nums[back], nums[front + 1]
                 front+=1
                 back+=1
             else:
