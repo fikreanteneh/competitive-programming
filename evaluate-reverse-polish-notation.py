@@ -17,8 +17,7 @@ class Solution:
             elif i == "/":
                 x = stack.pop()
                 y = stack.pop()
-                z = y//x
-                if z <0: z = 0
+                z = int(y/x)
                 stack.append(z)
             else: stack.append(int(i))
         return stack[0]
