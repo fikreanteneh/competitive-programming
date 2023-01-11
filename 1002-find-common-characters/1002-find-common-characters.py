@@ -8,9 +8,8 @@ class Solution:
                 letters[k] =  min(letters[k],tem)
         ans = []
         for i, rep in enumerate(letters):
-            if rep > 0:
-                for j in range(rep):
-                    ans.append(chr(i + 97))
+            for j in range(rep):
+                ans.append(chr(i + 97))
         return ans
     def count(self, lists):
         temp = [0] * 26
