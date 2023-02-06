@@ -25,30 +25,33 @@ class Solution:
         if num == "0":
             return ""
         if len(num) == 3:
-            return self.hunds(num)
+            return self.threeDigit(num)
         elif len(num) == 2:
-            return self.teens(num)
+            return self.twoDigit(num)
         else:
-            return self.one(num)
-    def teens(self, num):
-        teens = ["Ten", "Eleven", "Twelve", "Thirteen","Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+            return self.oneDigit(num)
+
+    def twoDigit(self, num):
+        twoDigit = ["Ten", "Eleven", "Twelve", "Thirteen","Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
         hund = ["Twenty", "Thirty","Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
         ans = []
         if num[0] == "1":
-            ans.append(teens[int(num) - 10])
+            ans.append(twoDigit[int(num) - 10])
         else:              
             ans.append(hund[int(num[0]) - 2])
             if num[1] != "0":
-                ans.append(self.one(num[1]))
+                ans.append(self.oneDigit(num[1]))
         x = " ".join(ans)
         return x
-    def one(self, num):
-        ones = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven","Eight","Nine"]
-        return ones[int(num)]
-    def hunds(self, nums):
-        ans = [self.one(nums[0]), "Hundred"]
-        if nums[1] != "0":
-            ans.append(self.teens(nums[1:]))
-        elif nums[2] != "0":
-            ans.append(self.one(nums[2:]))
+
+    def oneDigit(self, num):
+        onesDigit = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven","Eight","Nine"]
+        return onesDigit[int(num)]
+
+    def threeDigit(self, num):
+        ans = [self.oneDigit(num[0]), "Hundred"]
+        if num[1] != "0":
+            ans.append(self.twoDigit(num[1:]))
+        elif num[2] != "0":
+            ans.append(self.oneDigit(num[2:]))
         return " ".join(ans)
