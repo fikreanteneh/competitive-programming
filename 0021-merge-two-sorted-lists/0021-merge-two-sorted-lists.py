@@ -10,13 +10,11 @@ class Solution:
                 new.next = list2
                 list2 = list2.next
             new = new.next
-        while list1:
-            new.next = list1
-            list1 = list1.next
-            new = new.next
-        while list2:
-            new.next = list2
-            list2 = list2.next
+        
+        temp = list1 if list1 else list2
+        while temp:
+            new.next = temp
+            temp = temp.next
             new = new.next
         return head.next
 #             head = ListNode()
