@@ -7,14 +7,12 @@ class Solution:
         grid.append([0] * (len(grid[0]) ))
         bound =[0] #{1:0, 2:0, 3:0, 4:0}
         
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
+        for i in range(1,len(grid)-1):
+            for j in range(1, len(grid[0])-1):
                 if grid[i][j]:
                     self.calculator(grid, i, j, bound)
         
         return bound[0]
-        
-        
         
         
     def calculator(self, grid, i, j, bound):
