@@ -7,13 +7,29 @@
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         
-        def solution(root, answer):
-            if not root:
-                return
-            solution(root.left, answer)
-            answer.append(root.val)
-            solution(root.right, answer)
-            return
+        stack = []
         answer = []
-        solution(root, answer)
-        return answer
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            if not stack:
+                return answer
+            root = stack.pop()
+            answer.append(root.val)
+            root = root.right
+        
+        
+        
+        # RECURSION SOLUTION
+#         def solution(root, answer):
+#             if not root:
+#                 return
+#             solution(root.left, answer)
+#             answer.append(root.val)
+#             solution(root.right, answer)
+#             return
+        
+#         answer = []
+#         solution(root, answer)
+#         return answer
