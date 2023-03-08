@@ -16,26 +16,15 @@ class Solution:
             solution(root.right, pos + 1, row + 1)
         
         solution(root, 0, 0)
-        
         answer = []
-        
         for i,j in store.items():
             j.sort()
-        i = -1
-        while i in store:
-            temp = []
-            for j in store[i]:
-                temp.append(j[1])
-            answer.append(temp)
-            i -= 1
-        answer.reverse()
-        i = 0
-        while i in store:
-            temp = []
-            for j in store[i]:
-                temp.append(j[1])
-            answer.append(temp)
-            i += 1
-        return answer
+        store = list(store.items())
+        store.sort()
+        for i, values in enumerate(store):
+            for k, val in enumerate(values[1]):
+                values[1][k] = val[1]
+            store[i] = values[1] 
+        return store
         
             
