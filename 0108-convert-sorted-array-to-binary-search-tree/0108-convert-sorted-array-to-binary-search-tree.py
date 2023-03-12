@@ -11,8 +11,6 @@ class Solution:
         def solution(leftPointer, rightPointer):
             if leftPointer > rightPointer:
                 return None
-            elif leftPointer == rightPointer:
-                return TreeNode(nums[leftPointer])
             mid = leftPointer + ((rightPointer - leftPointer) // 2)
             node = TreeNode(nums[mid])
             node.left = solution(leftPointer, mid - 1)
