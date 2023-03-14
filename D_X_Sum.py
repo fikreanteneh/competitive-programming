@@ -8,11 +8,6 @@ def maximum(row, col, arr):
         for j in range(col):
             d1[j - i] += arr[i][j]
             d2[i + j] += arr[i][j]
-    # print(d1)
-    # print(d2)
-    # for i in range(row):
-    #     for j in range(col):
-    #         k = (i+j)
             
     maxi = 0
     for i in range(row):
