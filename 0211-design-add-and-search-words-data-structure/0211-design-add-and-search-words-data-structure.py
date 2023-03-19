@@ -1,6 +1,6 @@
 class Node:
     def __init__(self):
-        self.values = [None] * 26
+        self.values = defaultdict(list)
         self.status = False
 
 
@@ -11,10 +11,9 @@ class WordDictionary:
     def addWord(self, word: str) -> None:
         temp = self.root
         for letter in word:
-            index = ord(letter) - 97
-            if not temp.values[index]:
-                temp.values[index] = Node()
-            temp = temp.values[index]
+            if not temp.values[letter]:
+                temp.values[letter] = Node()
+            temp = temp.values[letter]
         temp.status = True
             
     def search(self, word: str) -> bool:
@@ -27,20 +26,18 @@ class WordDictionary:
         if word[index] == ".":
             flag = False
             if index == len(word) - 1:
-                for val in temp.values:
-                    flag = flag or (val and val.status)
+                for val, nodes in temp.values.items():
+                    flag = flag or (nodes and nodes.status)
                 return flag
-            for val in temp.values:
-                flag = flag or self.searching(word, index + 1, val)
+            for val, nodes in temp.values.items():
+                flag = flag or self.searching(word, index + 1, nodes)
             return flag
         
-        
-        checkIndex = ord(word[index]) - 97
-        if not temp.values[checkIndex]:
+        if not temp.values[word[index]]:
             return False
         elif index == len(word) - 1:
-            return temp.values[checkIndex].status
-        return self.searching(word, index + 1, temp.values[checkIndex])
+            return temp.values[word[index]].status
+        return self.searching(word, index + 1, temp.values[word[index]])
         
         
         
