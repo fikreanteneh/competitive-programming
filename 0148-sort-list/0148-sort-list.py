@@ -5,6 +5,16 @@
 #         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        lists = []
+        while head:
+            lists.append(head.val)
+            head=head.next
+        lists.sort()
+        head = None
+        for i in range(len(lists) - 1, -1, -1):
+            head = ListNode(lists[i], head)
+        return head
+    
         if not head or not head.next:
             return head
         
