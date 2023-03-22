@@ -1,18 +1,20 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
+        for i, val in enumerate(arr):
+            arr[i] = Counter(val) 
+        arr.sort()
         n = len(arr)
         self.length = 0
         letters = [0] * 26
         
         def helper(array):
-            count = Counter(array)
-            for i in count.values():
+            for i in array.values():
                 if i > 1:
                     return False
-            for i in count.keys():
+            for i in array.keys():
                 if letters[ord(i)-97]:
                     return False
-            for i in count.keys():
+            for i in array.keys():
                 letters[ord(i)-97] += 1
             return True
         
@@ -24,7 +26,7 @@ class Solution:
                 temp = helper(arr[i])
                 solution(i + 1)
                 if temp:
-                    for j in arr[i]:
+                    for j in arr[i].keys():
                         letters[ord(j)-97] -= 1
         
         solution(0)
