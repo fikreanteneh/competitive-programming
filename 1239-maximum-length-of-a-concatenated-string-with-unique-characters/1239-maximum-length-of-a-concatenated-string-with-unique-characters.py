@@ -1,9 +1,5 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
-        maxi = 0
-        for i in arr:
-            maxi += len(i)
-        maxi %= 26
         n = len(arr)
         self.length = 0
         letters = [0] * 26
@@ -34,30 +30,5 @@ class Solution:
         solution(0)
         return self.length
                 
-        
-        
-        
-        
-#         def repeated(val):
-#             x = Counter(val)
-#             for i in x.values():
-#                 if i > 1:
-#                     return set()
-#             return set(x.keys())
-        
-#         length = 0
-#         for i, val in enumerate(arr):
-#             store = repeated(val)
-#             if not repeated:
-#                 continue
-#             for j in range(i+1, len(arr)):
-#                 vals = repeated(arr[j])
-#                 if not vals:
-#                     continue
-#                 if not len(store.intersection(vals)):
-#                     store = store.union(vals)
-#             print(len(store))
-#             length = max(length, len(store))  
-#         return length
             
         
