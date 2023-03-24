@@ -3,7 +3,6 @@ class Solution:
         for i, val in enumerate(nums):
             nums[i] = (val, i)
         n = len(nums)
-        temp = [None] * n
         self.answer = [0] * n
         
         
@@ -18,31 +17,24 @@ class Solution:
         def merge(left, mid ,right):
             i, j = left, mid
             index = left
+            temp = []
             stack = [0] * (mid - left)
             while i < mid and j < right:
                 if nums[j][0] < nums[i][0]:
                     stack[i - left] += 1
-                    temp[index] = nums[j]
+                    temp.append(nums[j])
                     j += 1
                 else:
-                    temp[index] = nums[i]
+                    temp.append(nums[i])
                     i += 1
-                index += 1
-
-            while i < mid:
-                temp[index] = nums[i]
-                i += 1  
-                index += 1
-            while j < right:
-                temp[index] = nums[j]
-                j += 1
-                index += 1
+            temp.extend(nums[i:mid])
+            temp.extend(nums[j:right])
             curr = 0
             for i in range(left, mid):
                 curr += stack[i-left]
                 self.answer[nums[i][1]] += curr
             for i in range(left, right):
-                nums[i] = temp[i]
+                nums[i] = temp[i - left]
         
         mergeSort(0, n - 1)
         return self.answer
