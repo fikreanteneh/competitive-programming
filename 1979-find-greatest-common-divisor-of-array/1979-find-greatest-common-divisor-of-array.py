@@ -3,10 +3,14 @@ class Solution:
         x = min(nums)
         y = max(nums)
         
-        def euclid(y, x):
+        while True:
             temp = y % x
             if not temp:
                 return x
-            return euclid(x, temp)
+            y, x = x, temp
         
-        return euclid(y, x)
+#         def euclid(y, x):
+            
+#             return euclid(x, temp)
+        
+#         return euclid(y, x)
