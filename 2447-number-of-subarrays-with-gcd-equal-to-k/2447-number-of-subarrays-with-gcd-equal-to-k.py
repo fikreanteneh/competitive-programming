@@ -16,5 +16,7 @@ class Solution:
                 gcd = findGCD(gcd, nums[j])
                 if gcd == k:
                     ans += 1
+                elif gcd < k:
+                    break
         return ans
                 
