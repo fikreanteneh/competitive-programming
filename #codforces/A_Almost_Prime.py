@@ -29,4 +29,12 @@ for num in range(3, rang + 1):
         almost += 1
 print(almost)
 
-        
+n = 10000
+num = [i for i in range(n+1)]
+for i in num:
+    for j in range(i, int(num **(0.5)), i):
+        x = i * j
+        if x > n:
+            break
+        num[i * j] = 0
+print(set(num))
