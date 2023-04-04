@@ -7,9 +7,7 @@ class Solution:
         r = int(sqrt(n)) + 1
         for i in range(2, r):
             if num[i]:
-                for j in range(i, n//i + 1):
-                    x = i * j
-                    if x  < n:
-                        num[x] = False
+                for j in range(i*i, n, i):
+                    num[j] = False
         return Counter(num)[True]
             
