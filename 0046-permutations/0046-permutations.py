@@ -4,17 +4,18 @@ class Solution:
         stack = []
         n = len(nums)
         self.cur = 0
+        check = 2 ** (n) - 1
         
-        def solution(index):
-            if index == n:
+        def solution():
+            if self.cur == check:
                 ans.append(stack.copy())
                 return
             for i in range(0, n ):
                 if not (self.cur & ( 1 << i)):
                     stack.append(nums[i])
                     self.cur |= (1 << i)
-                    solution(index + 1)
+                    solution()
                     self.cur ^= (1 << i) 
                     stack.pop()
-        solution(0)
+        solution()
         return ans
