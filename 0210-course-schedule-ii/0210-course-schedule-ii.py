@@ -1,18 +1,17 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         
-        graph = {i: [0, []] for i in range(numCourses)}
+        graph = {i: [] for i in range(numCourses)}
         for course, pre in prerequisites:
-            graph[course][0] += 1
-            graph[pre][1].append(course)
+            graph[pre].append(course)
         answer = []
         visited = set()
         def solution(node, visited):
             if node in visited:
                 return True
             visited.add(node)
-            for child in graph[node][1]:
-                if graph[child] and solution(child, visited):
+            for child in graph[node]:
+                if graph[child] != None and solution(child, visited):
                     return True
             
             answer.append(node)
@@ -20,7 +19,7 @@ class Solution:
         
         
         for node in range(numCourses):
-            if graph[node] and solution(node, set()):
+            if graph[node] != None and solution(node, set()):
                 return []
         answer.reverse()
         return answer
