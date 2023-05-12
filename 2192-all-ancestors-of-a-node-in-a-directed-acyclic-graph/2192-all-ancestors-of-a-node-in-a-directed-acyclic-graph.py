@@ -1,5 +1,6 @@
 class Solution:
     def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        
         graph = {i:[0 ,[]] for i in range(n)}
         for i, j in edges:
             graph[i][1].append(j)
