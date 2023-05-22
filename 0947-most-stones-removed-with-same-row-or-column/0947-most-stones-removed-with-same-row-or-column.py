@@ -9,9 +9,10 @@ class Solution:
                 node = parent[node]
                 
             while temp != parent[temp]:
-                x = parent[temp]
-                parent[temp] = node
-                temp = x
+                parent[temp], temp = node, parent[temp]
+                # x = parent[temp]
+                # parent[temp] = node
+                # temp = x
             return node
 
         def union(n1, n2):
