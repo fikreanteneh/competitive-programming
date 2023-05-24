@@ -3,9 +3,8 @@ class Solution:
         
         ans = 0
         n = len(prices)
-        prices.append(float("-inf"))
         
-        for i in range(n):
+        for i in range(n-1):
             p1 = prices[i]
             p2 = prices[i+1]
             if p2 > p1:
