@@ -1,16 +1,11 @@
 from collections import defaultdict
 
 
-def LI():
-    return list(map(int, input().split(" ")))
-def LS():
-    return input().split(" ")
-def LC():
-    return input().split()
-def I():
-    return int(input())
-def S():
-    return input()
+def LI(): return list(map(int, input().split(" ")))
+def LS(): return input().split(" ")
+def LC(): return input().split()
+def I(): return int(input())
+def S(): return input()
 
 n = I()
 connection = {i: [] for i in range(n)}
