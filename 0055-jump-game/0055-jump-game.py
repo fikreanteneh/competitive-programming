@@ -2,16 +2,8 @@ class Solution:
     def canJump(self, nums: List[int]) -> bool:
         # store = set()
         n = len(nums) - 1
-        
-        @cache
-        def sol(index):
-            if index == n:
-                return True
-            elif index > n:
-                return False
-            for i in range(1,nums[index] + 1):
-                if sol(index + i):
-                    return True
-            return False
-        
-        return sol(0)
+        last = n
+        for i in range(n - 1, -1, -1):
+            if nums[i] + i >= last:
+                last = i
+        return last <= 0
