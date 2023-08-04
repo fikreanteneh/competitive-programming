@@ -12,37 +12,48 @@ class Codec:
         """
         if not root:
             return ""
-        answer = []
-        que = deque([(root, 0, 0, "R")])
-        id = 0
-        while que:
-            node, parent, nodeId, dx = que.popleft()
-            if not node:
-                continue
-            answer.append(str(nodeId) + "|" + str(parent) + "|" + str(node.val) + "|" + dx )
-            que.append((node.left, nodeId, id + 1, "L"))
-            que.append((node.right, nodeId, id + 2, "R"))
-            id += 2
-        answer = list(answer)
-        return " ".join(answer)
+        incode = []
+        def dfs(root):
+            if not root:
+                incode.append("-")
+                return
+            incode.append(str(root.val))
+            dfs(root.left)
+            dfs(root.right)
+        dfs(root)
+        return "|".join(incode)
         
 
     def deserialize(self, data: str) -> Optional[TreeNode]:
         """Decodes your encoded data to tree.
         """
+        # print(data)
         if not data:
-            return None        
-        trees = {}
-        data = data.split(" ")
-        n = len(data)
-        nodeId, parent, val, dx = data[0].split("|")
-        trees[int(nodeId)] = TreeNode(int(val))
+            return None
+        decode = data.split("|")
+        # print(decode)
+        tree = TreeNode(int(decode[0]))
+        stack = [[tree, 2]]
+        n = len(decode)
+        
         for i in range(1, n):
-            nodeId, parent, val, dx = data[i].split("|")
-            trees[int(nodeId)] = TreeNode(int(val))
-            if dx == "L": trees[int(parent)].left = trees[int(nodeId)]
-            else: trees[int(parent)].right = trees[int(nodeId)]
-        return trees[0]
+            # print(stack[-1][0].val)
+            newTree = None
+            if decode[i] != "-":
+                newTree = TreeNode(int(decode[i]))    
+            if stack[-1][1] == 2:
+                stack[-1][0].left = newTree
+            elif stack[-1][1] == 1:
+                stack[-1][0].right = newTree
+            stack[-1][1] -= 1
+            if stack[-1][1] == 0:
+                stack.pop()
+            if newTree:
+                stack.append([newTree, 2])
+        
+        return tree
+            
+            
             
         
 
