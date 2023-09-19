@@ -1,5 +1,18 @@
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
+        
+        #Greedy
+        pairs.sort(key = lambda x: x[1])
+        count = 0
+        curr = -1001
+        for x, y in pairs:
+            if x > curr:
+                curr = y
+                count += 1
+        return count
+        
+        
+        # DP
         pairs.sort()
         n = len(pairs)
         answer = [1]
