@@ -38,25 +38,29 @@ class MyLinkedList:
 class MyHashMap:
 
     def __init__(self, size = 10**4):
-        self.size = (size + 10)
-        self.keys = [MyLinkedList() for _ in range(self.size)]
+        self.keys = [-1] * (10**6 + 2)
+        # self.size = (size + 10)
+        # self.keys = [MyLinkedList() for _ in range(self.size)]
     
-    def hashFunction(self, value):
-        hashedValue = hash(value)
-        hashWithinRange = (hashedValue% (self.size - 10) )
-        return hashWithinRange
+    # def hashFunction(self, value):
+    #     hashedValue = hash(value)
+    #     hashWithinRange = (hashedValue% (self.size - 10) )
+    #     return hashWithinRange
 
     def put(self, key: int, value: int) -> None:
-        index = self.hashFunction(key)
-        self.keys[index].add(key, value)
+        self.keys[key] = value
+        # index = self.hashFunction(key)
+        # self.keys[index].add(key, value)
         
     def get(self, key: int) -> int:
-        index = self.hashFunction(key)
-        return self.keys[index].get(key).val
+        return self.keys[key]
+        # index = self.hashFunction(key)
+        # return self.keys[index].get(key).val
         
     def remove(self, key: int) -> None:
-        index = self.hashFunction(key)
-        self.keys[index].delete(key)
+        self.keys[key] = -1
+        # index = self.hashFunction(key)
+        # self.keys[index].delete(key)
         
 
 
