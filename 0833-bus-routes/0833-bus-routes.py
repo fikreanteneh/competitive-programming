@@ -1,24 +1,25 @@
 class Solution:
     def numBusesToDestination(self, routes: List[List[int]], source: int, target: int) -> int:
-        
+        if source == target:
+            return 0
         graph = defaultdict(list)
-        for i, val in enumerate(routes):
-            n = len(val)
+        for i, route in enumerate(routes):
+            n = len(route)
             for j in range(n):
-                graph[val[j]].append( (i,val[(j + 1)%n]) )
-        visited = set([(source, -1)])
-        route = deque([(source, 0, -1)])
-        while route:
-            pos, level, cur = route.pop()
-            if pos == target:
-                return level
-            visited.add((pos,cur))
+                graph[route[j]].append(i)
+        visited = set(graph[source])
+        que = deque(graph[source])
+        level = 0
+        while que:
             level += 1
-            for bus, forward in graph[pos]:
-                if (forward, bus) not in visited:
-                    if bus == cur:
-                        route.append((forward, level - 1, bus))
-                    else:
-                        route.appendleft((forward, level, bus))
-                        
+            n = len(que)
+            for _ in range(n):
+                bus = que.pop()
+                for stop in routes[bus]:
+                    if stop == target:
+                        return level 
+                    for nextBus in graph[stop]:
+                        if nextBus not in visited:
+                            que.appendleft(nextBus)
+                            visited.add(nextBus)
         return -1
