@@ -1,13 +1,16 @@
 class Solution:
-    @cache
     def myPow(self, x: float, n: int) -> float:
-        # return x**n
-        result= self.solution(x, abs(n))
-        return result if n > -1 else 1/result
-        
-    def solution(self,x, y):
-        if y == 0:
+        @cache
+        def mypow(x, n):
+            if n == 1:
+                return x
+            if n%2:
+                return mypow(x, n//2)*mypow(x, n//2)*x
+            else:
+                return mypow(x, n//2)*mypow(x, n//2)
+        if n == 0:
             return 1
-        elif y % 2 == 0:
-            return self.myPow(x, y//2) * self.myPow(x, y//2)
-        return x * self.myPow(x, y-1)
+        ans = mypow(x, abs(n))
+        if n < 0:
+            return 1/ans
+        return ans
