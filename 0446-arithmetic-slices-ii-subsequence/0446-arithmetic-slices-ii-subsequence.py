@@ -19,4 +19,5 @@ class Solution:
                 diff = nums1 - nums2
                 answer += store[j][diff]
                 store[i][diff] += (1 + store[j][diff])
+            print(store[i])
         return answer
