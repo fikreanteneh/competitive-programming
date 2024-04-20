@@ -6,22 +6,29 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    
         self.index = 0
         n = len(preorder)
-        preorder.extend([float("inf"), float("inf")])
+        preorder.extend([float("-inf"), float("inf")])
+        inorder.extend([float("-inf"), float("inf")])
         
+        mapp = {}
+        for i, element in enumerate(inorder):
+            mapp[element] = i
+            
         def solve(left, mid ,right):
-            node = TreeNode(inorder[mid])
             if self.index >= n:
                 return None
-            for i in range(left, mid):
-                if preorder[self.index + 1] == inorder[i]:
-                    self.index += 1
-                    node.left = solve(left, i, mid - 1)
-            for i in range(mid + 1, right + 1):
-                if preorder[self.index + 1] == inorder[i]:
-                    self.index += 1
-                    node.right = solve(mid + 1, i, right)
+            
+            node = TreeNode(inorder[mid])
+            
+            if left <= mapp[preorder[self.index + 1]] < mid:
+                self.index += 1
+                node.left = solve(left, mapp[preorder[self.index ]], mid - 1)
+                
+            if mid < mapp[preorder[self.index + 1]] <= right:
+                self.index += 1
+                node.right = solve(mid + 1, mapp[preorder[self.index]], right)
             return node
         
         return solve(0, inorder.index(preorder[0]), n - 1)
