@@ -1,5 +1,20 @@
 class Solution:
     def continuousSubarrays(self, nums: List[int]) -> int:
+        # Hash Map
+        store = defaultdict(int)
+        left = 0
+        count = 0
+        for right, num in enumerate(nums):
+            store[num] += 1
+            while max(store.keys()) - min(store.keys()) > 2:
+                store[nums[left]] -= 1
+                if store[nums[left]] == 0:
+                    del store[nums[left]]
+                left += 1
+            count += right - left + 1
+        return count
+                
+        
         # Monotonic Queue
         maxi, mini = deque([]), deque([])
         count = 0
