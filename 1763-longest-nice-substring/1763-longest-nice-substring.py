@@ -17,8 +17,3 @@ class Solution:
             return s[left:right + 1]   
         
         return solve(0, len(s) - 1)
-        
-        
-        
-        
-        
