@@ -4,6 +4,7 @@ class Solution:
             return string == string[::-1]
         
         n = len(s)
+        @cache
         def backtrack(index, div):
             if index == n:
                 return div == 3
