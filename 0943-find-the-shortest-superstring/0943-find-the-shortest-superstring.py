@@ -30,8 +30,7 @@ class Solution:
             return (currBest[0], curr)
         
         @cache
-        def backtrack(state, curr):
-
+        def dp(state, curr):
             if (state ^ (1<<curr)) == self.target:
                 return (words[curr], curr)
             state ^= (1 << curr)
@@ -39,12 +38,12 @@ class Solution:
             for i in range(n):
                 if state & (1 << i):
                     continue
-                possible.append(backtrack(state, i))
+                possible.append(dp(state, i))
             return pickTheBest(possible, curr)
         
         answer = "x"*241
         for i in range(n):
-            word, _ = (backtrack(0, i))
+            word, _ = (dp(0, i))
             if len(word) < len(answer):
                 answer = word
         return answer
@@ -52,37 +51,7 @@ class Solution:
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        #Subset Solution
-        n = len(words)
-        self.state = 0
-        self.target = (1<<n) - 1
-        self.answer = "x"*241
-        
-        def findPrefix(word1, word2):
-            index = 0
-            if word2 in word1:
-                return ""
-            m = len(word1)
-            for i in range(min(len(word1),len(word2))):
-                if word1[m - i - 1:] == word2[:i + 1]:
-                    index = i + 1
-            return word2[index:]
-        
-        store = [["" for i in range(n)] for j in range(n)]
-        for i in range(n):
-            for j in range(i):
-                store[i][j] = findPrefix(words[i], words[j])
-                store[j][i] = findPrefix(words[j], words[i])
-                
-        
+        #Subset Solution Does not work n!            
         def backtrack(curr, index):
             if len(curr) >= len(self.answer):
                 return
