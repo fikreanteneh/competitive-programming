@@ -5,21 +5,20 @@
 function memoize(fn) {
     const cache = new Map()
     const result = Symbol()
-    return (...params) => {
-        let currentCache = cache;
-        for(const param of params) {
-            if (!currentCache.has(param)) {
-                currentCache.set(param, new Map());
+    return function(...args) {
+        let curr = cache;
+        for (const arg of args) {
+            if (!curr.has(arg)) {
+                curr.set(arg, new Map());
             }
-            currentCache = currentCache.get(param);
+            curr = curr.get(arg);
         }
-
-        if (currentCache.has(result)) return currentCache.get(result);
-        currentCache.set(result, fn(...params));
-        return currentCache.get(result);
+        if (!(curr.has(result))) {
+            curr.set(result, fn(...args));
+        }
+        return curr.get(result);
     }
 }
-
 
 /** 
  * let callCount = 0;
