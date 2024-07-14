@@ -12,8 +12,10 @@ var partition = function(s) {
         return true
     }
     
+    const cache = new Map()
+    cache.set(-1, [[]])
     function dp(index){
-        if (index == -1) return [[]]
+        if (cache.has(index)) return cache.get(index)
         const possible = []
         for (let i = index; i >= 0; i--){
             const substring = s.substring(i, index + 1)
