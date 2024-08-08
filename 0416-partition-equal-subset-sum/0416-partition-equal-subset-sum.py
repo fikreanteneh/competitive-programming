@@ -1,16 +1,15 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
+        target = sum(nums)/2
         n = len(nums)
-        sums = sum(nums)
-        if sums%2 == 1:
-            return False
-        
         @cache
-        def solve(index, target):
-            if target == 0:
-                return True
-            if target < 0 or index >= n:
+        def solve(index, currentSum):
+            if index >= n or currentSum > target:
                 return False
-            return solve(index + 1, target - nums[index]) or solve(index + 1, target)
+            if currentSum == target:
+                return True
+            
+            return solve(index + 1, currentSum + nums[index]) or solve(index + 1, currentSum)
         
-        return solve(0, sum(nums)/2)
+        return solve(0, 0)
+            
